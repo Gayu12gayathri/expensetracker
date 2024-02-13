@@ -3,10 +3,11 @@ const bodyParser= require('body-parser')
 //importing the required function from dbcollection.cjs
 const {connetToDb,getDb}= require('./dbconnection.cjs')
 const { ObjectId } = require('mongodb')
-const app= express('path')
+const app= express()
+app.use(cors())
 app.use(bodyParser.json())
 
-
+let db
 connetToDb(function(error){
     if(error){// if error is there if occures
         console.log('could not establish connection...')
