@@ -13,9 +13,10 @@ connetToDb(function(error){
         console.log(error)
     }
     else{ //if there is no error this runs
-        app.listen(8000)
+        const port = process.env.PORT || 8000
+        app.listen(port)
         db=getDb() //reassignment
-        console.log('listening on port 8000...')
+        console.log(`listening on port ${port}...`)
     } 
 })
 
