@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser= require('body-parser')
 //importing the required function from dbcollection.cjs
 const {connetToDb,getDb}= require('./dbconnection.cjs')
+const cors = require('cors')
 const { ObjectId } = require('mongodb')
 const app= express()
 app.use(cors())
@@ -57,7 +58,7 @@ app.get('/get-entries',function(request,response){
         })
     })
 })
-app.delete('/delete-entry',function(request,response){
+app.delete('/delete-entry', function(request,response){
     db.collection('ExpenseData').deleteOne({
         _id : new ObjectId(request.query.id)
     }).then(function(){
@@ -71,7 +72,7 @@ app.delete('/delete-entry',function(request,response){
     })
 })
 
-app.patch('/update-entry/:id',function(request,response){
+app.patch('/update-entry/:id', function(request,response){
     //console.log(request.params)
     if(ObjectId.isValid(request.params.id)){
         db.collection('ExpenseData').updateOne(
